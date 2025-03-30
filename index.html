@@ -6,13 +6,14 @@
     <title>DatifyMe - Transform Data Into Growth</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
     <style>
         /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
         
         :root {
@@ -753,20 +754,20 @@
                 
                 <div class="cta-form">
                     <h3 class="form-title">Get in Touch</h3>
-                    <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/xnnpbgey" method="POST">
                         <div class="form-group">
                             <label for="name">Full Name</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="service">Interested In</label>
-                            <select id="service" class="form-control" required>
+                            <select id="service" name="service" class="form-control" required>
                                 <option value="">Select a service</option>
                                 <option value="data-extraction">Data Extraction & Lead Generation</option>
                                 <option value="data-transformation">Data Transformation & Preparation</option>
@@ -777,7 +778,7 @@
                         
                         <div class="form-group">
                             <label for="message">Tell us about your data needs</label>
-                            <textarea id="message" class="form-control" rows="4"></textarea>
+                            <textarea id="message" name="message" class="form-control" rows="4"></textarea>
                         </div>
                         
                         <button type="submit" class="btn" style="width: 100%;">Send Message</button>
