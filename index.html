@@ -805,9 +805,24 @@
         </div>
     </footer>
 
-    <!-- Simple JavaScript for Mobile Menu Toggle -->
+    <!-- JavaScript for site functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Add a specific event listener for the Get Started button
+            const getStartedBtn = document.querySelector('.hero-btns .btn');
+            if (getStartedBtn) {
+                getStartedBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: 'smooth' });
+                        console.log('Scrolling to contact section from Get Started button');
+                    } else {
+                        console.log('Contact section not found');
+                    }
+                });
+            }
+            
             const mobileToggle = document.querySelector('.mobile-toggle');
             const navMenu = document.querySelector('.nav-menu');
             
@@ -830,7 +845,7 @@
                     e.preventDefault();
                     
                     // Close mobile menu if open
-                    if (navMenu.classList.contains('active')) {
+                    if (navMenu && navMenu.classList.contains('active')) {
                         navMenu.classList.remove('active');
                         mobileToggle.querySelector('i').classList.remove('fa-times');
                         mobileToggle.querySelector('i').classList.add('fa-bars');
@@ -843,6 +858,11 @@
                             target.scrollIntoView({
                                 behavior: 'smooth'
                             });
+                            
+                            // For debugging - add a visual indicator
+                            console.log('Scrolling to:', href);
+                        } else {
+                            console.log('Target not found:', href);
                         }
                     }
                 });
