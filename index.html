@@ -659,7 +659,11 @@
                     <div class="logo-brackets">{ }</div>
                 </a>
                 
-                <div style="visibility: hidden;" class="mobile-toggle">
+                <ul class="nav-menu">
+                    <li><a href="https://datifyme.zendesk.com/hc/en-us" class="nav-link" target="_blank">FAQ</a></li>
+                </ul>
+                
+                <div class="mobile-toggle">
                     <i class="fas fa-bars"></i>
                 </div>
             </nav>
@@ -843,18 +847,20 @@
             const mobileToggle = document.querySelector('.mobile-toggle');
             const navMenu = document.querySelector('.nav-menu');
             
-            mobileToggle.addEventListener('click', function() {
-                navMenu.classList.toggle('active');
-                
-                const icon = mobileToggle.querySelector('i');
-                if (navMenu.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
+            if (mobileToggle && navMenu) {
+                mobileToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    
+                    const icon = mobileToggle.querySelector('i');
+                    if (navMenu.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            }
             
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -864,8 +870,11 @@
                     // Close mobile menu if open
                     if (navMenu && navMenu.classList.contains('active')) {
                         navMenu.classList.remove('active');
-                        mobileToggle.querySelector('i').classList.remove('fa-times');
-                        mobileToggle.querySelector('i').classList.add('fa-bars');
+                        const icon = mobileToggle.querySelector('i');
+                        if (icon) {
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
                     }
                     
                     const href = this.getAttribute('href');
