@@ -1,899 +1,527 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DatifyMe - Transform Data Into Growth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
-    <style>
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        :root {
-            --primary: #0F9D58; /* Google Sheets green */
-            --primary-dark: #0B8043;
-            --primary-light: #72CF9F;
-            --secondary: #5F6368; /* Google gray */
-            --success: #34A853; /* Google green */
-            --dark: #202124;
-            --light: #F8F9FA;
-            --white: #FFFFFF;
-            --gray-100: #F1F5F9;
-            --gray-200: #E2E8F0;
-            --gray-800: #3C4043;
-            --transition: all 0.3s ease;
-            --radius: 8px;
-            --shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        
-        body {
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        section {
-            padding: 6rem 0;
-        }
-        
-        h1, h2, h3, h4 {
-            margin-bottom: 1rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        
-        p {
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-            font-size: 1.05rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 14px 32px;
-            border: none;
-            border-radius: var(--radius);
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 1rem;
-            box-shadow: 0 4px 14px rgba(15, 157, 88, 0.2);
-        }
-        
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(15, 157, 88, 0.25);
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            box-shadow: none;
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--primary);
-            color: var(--white);
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-            display: inline-block;
-            color: var(--primary);
-        }
-        
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--secondary);
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Header/Navbar */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: var(--transition);
-            padding: 1rem 0;
-            background-color: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-text {
-            font-size: 3.5rem; /* Increased to match H1 size */
-            font-weight: 700;
-            color: var(--dark);
-            line-height: 1.1;
-        }
-        
-        .logo-text span {
-            color: var(--primary);
-            font-weight: 800;
-        }
-        
-        .logo-brackets {
-            color: var(--primary);
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-left: 8px;
-            line-height: 1.1;
-        }
-        
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-        
-        .nav-link {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            position: relative;
-            transition: var(--transition);
-            padding: 8px 12px;
-            border-radius: 6px;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary);
-            background-color: var(--gray-100);
-        }
-        
-        .nav-link.active {
-            color: var(--primary);
-            background-color: var(--gray-100);
-        }
-        
-        .nav-btn {
-            padding: 10px 24px;
-            font-size: 0.9rem;
-            margin-left: 10px;
-        }
-        
-        .mobile-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark);
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #F8F9FA 0%, #E8F5E9 100%);
-            padding-top: 12rem;
-            padding-bottom: 8rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: none;
-        }
-        
-        .hero::after {
-            content: none;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
-        }
-        
-        .hero-tagline {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 10px rgba(15, 157, 88, 0.2);
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-        
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            margin-bottom: 2.5rem;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-btns {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        /* Services Section */
-        .services {
-            background-color: var(--white);
-            position: relative;
-        }
-        
-        .services::before {
-            content: none;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 3rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .service-card {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            padding: 40px 30px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--gray-200);
-        }
-        
-        .service-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background-color: var(--primary);
-            z-index: -1;
-            transition: var(--transition);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .service-card:hover::before {
-            height: 100%;
-            opacity: 0.05;
-        }
-        
-        .service-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .service-tagline {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-        
-        .service-card p {
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-            flex: 1;
-        }
-        
-        /* How It Works Section */
-        .how-it-works {
-            background-color: var(--gray-100);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 3rem;
-        }
-        
-        .process-step {
-            display: flex;
-            align-items: flex-start;
-            background-color: var(--white);
-            border-radius: var(--radius);
-            padding: 30px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid var(--gray-200);
-        }
-        
-        .process-step:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .step-number {
-            background-color: var(--primary);
-            color: var(--white);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin-right: 20px;
-            flex-shrink: 0;
-        }
-        
-        .step-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-        
-        .step-content p {
-            margin-bottom: 0;
-            font-size: 1rem;
-        }
-        
-        /* CTA Section */
-        .cta {
-            background-color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta::before {
-            content: none;
-        }
-        
-        .cta-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .cta-content {
-            max-width: 500px;
-        }
-        
-        .cta-badge {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 10px rgba(15, 157, 88, 0.2);
-        }
-        
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta-description {
-            color: var(--secondary);
-            margin-bottom: 2rem;
-        }
-        
-        .cta-form {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            padding: 40px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-200);
-        }
-        
-        .form-title {
-            margin-bottom: 2rem;
-            font-size: 1.5rem;
-            color: var(--dark);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius);
-            font-size: 1rem;
-            transition: var(--transition);
-            background-color: var(--gray-100);
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(15, 157, 88, 0.1);
-        }
-        
-        .alt-contact {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-size: 0.95rem;
-            color: var(--secondary);
-        }
-        
-        .alt-contact a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 2rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-about h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .footer-about p {
-            color: var(--gray-200);
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-links h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links ul li a {
-            color: var(--gray-200);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .footer-links ul li a:hover {
-            color: var(--white);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .social-links a {
-            color: var(--gray-200);
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 1.2rem;
-        }
-        
-        .social-links a:hover {
-            color: var(--white);
-        }
-        
-        .copyright {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1.5rem;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--gray-200);
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .cta-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .cta-content {
-                max-width: 100%;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .logo-text, .logo-brackets {
-                font-size: 2.8rem; /* Slightly smaller on mobile */
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .services-grid,
-            .process-steps {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background-color: var(--white);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: var(--transition);
-                opacity: 0;
-                z-index: 999;
-                gap: 2rem;
-                padding: 2rem 0;
-            }
-            
-            .nav-menu.active {
-                left: 0;
-                opacity: 1;
-            }
-            
-            .mobile-toggle {
-                display: block;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StarkAIstudio — The busywork, quietly handled</title>
+<meta name="description" content="StarkAIstudio helps small companies put AI to work on the tasks nobody enjoys. Knowledge bases, process automation, cleaner data, faster research. Built for teams, not engineers." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@300;400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-elev: #111111;
+    --line: #1f1f1f;
+    --line-strong: #2a2a2a;
+    --text: #f5f5f4;
+    --text-dim: #a8a29e;
+    --text-muted: #6b6966;
+    --display: 'Fraunces', 'Times New Roman', serif;
+    --body: 'Inter Tight', -apple-system, system-ui, sans-serif;
+    --mono: 'JetBrains Mono', 'Menlo', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--body); font-weight: 300;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    pointer-events: none; z-index: 1; opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+ 
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    background: rgba(10, 10, 10, 0.72);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px; max-width: 1180px; margin: 0 auto;
+  }
+  .logo {
+    font-family: var(--display); font-weight: 400; font-size: 20px;
+    letter-spacing: -0.01em; color: var(--text); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-mark {
+    width: 18px; height: 18px; border: 1px solid var(--text);
+    position: relative; transform: rotate(45deg);
+  }
+  .logo-mark::after {
+    content: ''; position: absolute; inset: 3px; background: var(--text);
+  }
+  .logo em { font-style: normal; font-weight: 500; }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none;
+    font-size: 13px; font-weight: 400; letter-spacing: 0.01em;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    border: 1px solid var(--line-strong);
+    padding: 9px 18px !important; color: var(--text) !important;
+    transition: all 0.2s ease;
+  }
+  .nav-cta:hover { background: var(--text); color: var(--bg) !important; border-color: var(--text); }
+ 
+  .hero { padding: 180px 0 140px; position: relative; }
+  .hero-label {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 40px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-label::before { content: ''; width: 28px; height: 1px; background: var(--text-muted); }
+  .hero h1 {
+    font-family: var(--display); font-weight: 300;
+    font-size: clamp(44px, 7.5vw, 104px); line-height: 0.98;
+    letter-spacing: -0.035em; max-width: 15ch; margin-bottom: 42px;
+  }
+  .hero h1 em { font-style: italic; font-weight: 300; color: var(--text-dim); }
+  .hero-sub {
+    font-size: 18px; color: var(--text-dim);
+    max-width: 56ch; line-height: 1.65;
+    margin-bottom: 56px; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 28px; font-family: var(--body);
+    font-size: 14px; font-weight: 400; letter-spacing: 0.01em;
+    text-decoration: none; border: 1px solid var(--text);
+    transition: all 0.25s ease; cursor: pointer;
+  }
+  .btn-primary { background: var(--text); color: var(--bg); }
+  .btn-primary:hover { background: transparent; color: var(--text); }
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--text); }
+  .btn svg { width: 14px; height: 14px; }
+ 
+  section { padding: 120px 0; position: relative; }
+  .section-label {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 28px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::before { content: attr(data-num); color: var(--text-muted); }
+  .section-head {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 80px;
+    margin-bottom: 90px; align-items: end;
+  }
+  .section-head h2 {
+    font-family: var(--display); font-weight: 300;
+    font-size: clamp(34px, 5vw, 60px); line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+  .section-head h2 em { font-style: italic; color: var(--text-dim); font-weight: 300; }
+  .section-head p {
+    font-size: 17px; color: var(--text-dim);
+    line-height: 1.65; font-weight: 300; max-width: 56ch;
+  }
+ 
+  .services { border-top: 1px solid var(--line); }
+  .services-grid { display: grid; grid-template-columns: 1fr; }
+  .service {
+    display: grid; grid-template-columns: 80px 1fr 1.2fr 180px;
+    gap: 40px; padding: 48px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start; transition: background 0.3s ease;
+  }
+  .service:hover { background: rgba(255,255,255,0.012); }
+  .service-num {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--text-muted); letter-spacing: 0.1em; padding-top: 8px;
+  }
+  .service-name {
+    font-family: var(--display); font-weight: 400; font-size: 26px;
+    letter-spacing: -0.015em; line-height: 1.2;
+  }
+  .service-pain {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); margin-top: 10px; line-height: 1.6;
+  }
+  .service-desc { color: var(--text-dim); font-size: 15px; line-height: 1.7; font-weight: 300; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-dim); padding: 5px 10px;
+    border: 1px solid var(--line-strong); border-radius: 2px;
+  }
+ 
+  .approach { border-top: 1px solid var(--line); background: var(--bg-elev); }
+  .approach-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; border: 1px solid var(--line);
+  }
+  .step {
+    padding: 44px 32px; border-right: 1px solid var(--line); background: var(--bg);
+  }
+  .step:last-child { border-right: none; }
+  .step-num {
+    font-family: var(--display); font-weight: 300;
+    font-size: 56px; line-height: 1; color: var(--text);
+    margin-bottom: 32px; letter-spacing: -0.04em;
+  }
+  .step-num em { font-style: italic; color: var(--text-muted); }
+  .step-title {
+    font-family: var(--display); font-size: 19px;
+    font-weight: 400; margin-bottom: 14px; letter-spacing: -0.01em;
+  }
+  .step-desc { color: var(--text-dim); font-size: 14px; line-height: 1.65; font-weight: 300; }
+ 
+  .contact { border-top: 1px solid var(--line); padding: 140px 0; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .contact-intro h2 {
+    font-family: var(--display); font-weight: 300;
+    font-size: clamp(36px, 4.5vw, 56px); line-height: 1.02;
+    letter-spacing: -0.025em; margin-bottom: 32px;
+  }
+  .contact-intro h2 em { font-style: italic; color: var(--text-dim); }
+  .contact-intro p {
+    color: var(--text-dim); font-size: 16px;
+    line-height: 1.7; margin-bottom: 32px;
+    font-weight: 300; max-width: 44ch;
+  }
+  .contact-meta {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--text-muted); letter-spacing: 0.05em;
+    line-height: 2; border-top: 1px solid var(--line); padding-top: 28px;
+  }
+  .contact-meta span { color: var(--text); }
+ 
+  form { display: flex; flex-direction: column; gap: 28px; }
+  .field { display: flex; flex-direction: column; gap: 10px; }
+  .field label {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .field input, .field select, .field textarea {
+    background: transparent; border: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding: 12px 0; color: var(--text);
+    font-family: var(--body); font-size: 16px; font-weight: 300;
+    transition: border-color 0.25s ease; outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-bottom-color: var(--text); }
+  .field select {
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a8a29e' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 4px center;
+    padding-right: 24px; cursor: pointer;
+  }
+  .field select option { background: var(--bg); color: var(--text); }
+  .field textarea { resize: vertical; min-height: 90px; font-family: var(--body); }
+  .field input::placeholder, .field textarea::placeholder { color: var(--text-muted); font-weight: 300; }
+  form .btn { align-self: flex-start; margin-top: 12px; }
+  .form-note {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-muted); letter-spacing: 0.05em; margin-top: 4px;
+  }
+  .form-note a { color: var(--text-dim); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+  .form-note a:hover { color: var(--text); border-bottom-color: var(--text); }
+ 
+  footer { border-top: 1px solid var(--line); padding: 40px 0; }
+  .footer-inner {
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 20px;
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .footer-inner a { color: var(--text-muted); text-decoration: none; transition: color 0.2s ease; }
+  .footer-inner a:hover { color: var(--text); }
+ 
+  .reveal { opacity: 0; transform: translateY(20px); animation: reveal 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+  .d1 { animation-delay: 0.1s; }
+  .d2 { animation-delay: 0.25s; }
+  .d3 { animation-delay: 0.4s; }
+  .d4 { animation-delay: 0.55s; }
+ 
+  @media (max-width: 900px) {
+    .wrap { padding: 0 22px; }
+    section { padding: 80px 0; }
+    .hero { padding: 140px 0 90px; }
+    .section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 50px; }
+    .service { grid-template-columns: 40px 1fr; gap: 16px 18px; padding: 36px 0; }
+    .service-desc { grid-column: 2 / 3; }
+    .service-tags { grid-column: 2 / 3; }
+    .approach-grid { grid-template-columns: 1fr 1fr; }
+    .step { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .step:nth-child(2n) { border-right: none; }
+    .step:nth-child(n+3) { border-bottom: none; }
+    .contact-grid { grid-template-columns: 1fr; gap: 60px; }
+    .nav-links { gap: 18px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+</style>
 </head>
 <body>
-    <!-- Header/Navbar -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">
-                    <div class="logo-text">Datify<span>Me</span></div>
-                    <div class="logo-brackets">{ }</div>
-                </a>
-                
-                <ul class="nav-menu">
-                    <li><a href="https://datifyme.zendesk.com/hc/en-us" class="nav-link" target="_blank">FAQ</a></li>
-                </ul>
-                
-                <div class="mobile-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
+ 
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark"></span>
+      <span>Stark<em>AI</em>studio</span>
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact" class="nav-cta">Start a project</a>
+    </div>
+  </div>
+</nav>
+ 
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-label reveal d1">AI Studio · Est. 2026</div>
+    <h1 class="reveal d2">
+      The busywork,<br>
+      <em>quietly handled.</em>
+    </h1>
+    <p class="hero-sub reveal d3">
+      StarkAIstudio helps small companies put AI to work on the tasks nobody enjoys. The repetitive research, the messy spreadsheets, the questions your team answers for the hundredth time. We build it, we run it, you get your weekends back.
+    </p>
+    <div class="hero-actions reveal d4">
+      <a href="#contact" class="btn btn-primary">
+        Start a project
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 7h12M8 2l5 5 5 5"/></svg>
+      </a>
+      <a href="#services" class="btn btn-ghost">See what we do</a>
+    </div>
+  </div>
+</header>
+ 
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-label" data-num="01 —">What we do</div>
+        <h2>The work you<br><em>shouldn't be doing.</em></h2>
+      </div>
+      <p>Every small company has a handful of tasks that eat hours, frustrate everyone, and still need to get done. We find those tasks and quietly take them off your plate. No jargon, no long implementations, no reason you need to become an AI expert to get the benefits.</p>
+    </div>
+ 
+    <div class="services-grid">
+ 
+      <article class="service">
+        <div class="service-num">01</div>
+        <div>
+          <h3 class="service-name">Internal Knowledge Base</h3>
+          <div class="service-pain">The same questions, asked forever</div>
         </div>
-    </header>
-    
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-
-                <h1>Transform Raw Data Into Growth Opportunities</h1>
-                <p class="hero-description">Bridging the gap between data analytics and growth marketing with personalized solutions tailored to sales and marketing needs.</p>
-                
-                <div class="hero-btns">
-                    <a href="#contact" class="btn">Get Started Today</a>
-                </div>
-            </div>
+        <p class="service-desc">A private assistant that knows your company. It reads your documents, your wikis, your handbooks, and answers questions from your team in seconds. Onboarding gets faster, support tickets go down, and your senior people stop being interrupted every ten minutes.</p>
+        <div class="service-tags">
+          <span class="tag">Ops</span>
+          <span class="tag">HR</span>
+          <span class="tag">Support</span>
         </div>
-    </section>
-    
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title">Specialized Data Services</h2>
-                <p class="section-subtitle">DatifyMe blends technical expertise with a client-centric approach to help businesses harness the power of clean, structured, and sales-ready data for maximum impact.</p>
-            </div>
-            
-            <div class="services-grid">
-                <!-- Data Extraction & Lead Generation -->
-                <div class="service-card">
-                    <h3>Data Extraction & Lead Generation</h3>
-                    <p class="service-tagline">Find Your Ideal Prospects</p>
-                    <p>Specializes in identifying and capturing high-quality leads through targeted data extraction from multiple sources including social media platforms and website data scraping. The service focuses on creating sales-ready contact lists that connect businesses with decision-makers to drive conversion and business growth.</p>
-                </div>
-                
-                <!-- Data Transformation & Preparation -->
-                <div class="service-card">
-                    <h3>Data Transformation & Preparation</h3>
-                    <p class="service-tagline">Clean Data for Seamless Analysis</p>
-                    <p>Transforms chaotic information into structured, clean datasets ready for analysis. The focus is on data cleaning, formatting, and preparation to ensure data quality and consistency. This service bridges the gap between raw data collection and analysis, creating organized datasets that are ready for CRM integration, business intelligence tools, and marketing platforms.</p>
-                </div>
-                
-                <!-- Workflow Automation -->
-                <div class="service-card">
-                    <h3>Workflow Automation</h3>
-                    <p class="service-tagline">Streamline Your Operations</p>
-                    <p>Automates repetitive data processes to save time, reduce errors, and ensure consistency. The service includes lead capture automation, CRM data synchronization, and automated follow-up sequence setup. By streamlining data workflows, businesses can operate more efficiently and focus on strategic growth initiatives rather than manual data handling.</p>
-                </div>
-            </div>
+      </article>
+ 
+      <article class="service">
+        <div class="service-num">02</div>
+        <div>
+          <h3 class="service-name">Process Automation</h3>
+          <div class="service-pain">The same steps, a thousand times a month</div>
         </div>
-    </section>
-    
-    <!-- How It Works Section -->
-    <section class="how-it-works" id="process">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title">Our Approach</h2>
-                <p class="section-subtitle">DatifyMe follows a systematic process to ensure data needs are met with precision and care, delivering measurable results that drive growth.</p>
-            </div>
-            
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Discovery & Assessment</h3>
-                        <p>Understanding business goals, data challenges, and growth targets to create a tailored solution.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Strategy Development</h3>
-                        <p>Based on specific needs, developing a customized strategy that outlines data sources, methods, and expected outcomes.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Implementation</h3>
-                        <p>Executing the strategy with precision, ensuring data quality, compliance, and alignment with business processes.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Optimization & Growth</h3>
-                        <p>Continuous refinement of the data processes to improve results and adapt to evolving business needs.</p>
-                    </div>
-                </div>
-            </div>
+        <p class="service-desc">We take the workflows your team runs manually and turn them into something that runs on its own. Invoices, approvals, handoffs, follow ups, reporting. Things that used to take a morning now happen in the background while you focus on the work that actually needs a human.</p>
+        <div class="service-tags">
+          <span class="tag">Ops</span>
+          <span class="tag">Finance</span>
+          <span class="tag">Sales</span>
         </div>
-    </section>
-    
-    <!-- CTA Section -->
-    <section class="cta" id="contact">
-        <div class="container">
-            <div class="cta-container">
-                <div class="cta-content">
-
-                    <h2>Ready to Transform Your Data?</h2>
-                    <p class="cta-description">Discuss how DatifyMe can help turn information into growth opportunities with personalized data solutions tailored specifically to your business needs.</p>
-                    <a href="#contact" class="btn">Schedule a Free Consultation</a>
-                </div>
-                
-                <div class="cta-form">
-                    <h3 class="form-title">Get in Touch</h3>
-                    <form id="contactForm" action="https://formspree.io/f/xnnpbgey" method="POST">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">Interested In</label>
-                            <select id="service" name="service" class="form-control" required>
-                                <option value="">Select a service</option>
-                                <option value="data-extraction">Data Extraction & Lead Generation</option>
-                                <option value="data-transformation">Data Transformation & Preparation</option>
-                                <option value="workflow-automation">Workflow Automation</option>
-                                <option value="all">All Services</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Tell us about your data needs</label>
-                            <textarea id="message" name="message" class="form-control" rows="4"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
-                    </form>
-                    
-                    <div class="alt-contact">
-                        <p>Or email directly at <a href="mailto:hello@datifyme.com">hello@datifyme.com</a></p>
-                    </div>
-                </div>
-            </div>
+      </article>
+ 
+      <article class="service">
+        <div class="service-num">03</div>
+        <div>
+          <h3 class="service-name">Research on Autopilot</h3>
+          <div class="service-pain">Hours lost to copy, paste, and summarise</div>
         </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 20px; padding: 10px 0;">
-                <a href="#" style="color: var(--gray-200); text-decoration: none; transition: var(--transition); font-size: 1rem;">LinkedIn</a>
-            </div>
-            
-            <div class="copyright">
-                <p>© 2025 DatifyMe. All rights reserved.</p>
-            </div>
+        <p class="service-desc">Market research, account research, competitor research, partner lists. The kind of work that takes a person a week and comes back slightly different every time. We set it up once, you press a button, and you get a clean, consistent report in the time it takes to make coffee.</p>
+        <div class="service-tags">
+          <span class="tag">Sales</span>
+          <span class="tag">BD</span>
+          <span class="tag">Strategy</span>
         </div>
-    </footer>
-
-    <!-- JavaScript for site functionality -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add a specific event listener for the Get Started button
-            const getStartedBtn = document.querySelector('.hero-btns .btn');
-            if (getStartedBtn) {
-                getStartedBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                        contactSection.scrollIntoView({ behavior: 'smooth' });
-                        console.log('Scrolling to contact section from Get Started button');
-                    } else {
-                        console.log('Contact section not found');
-                    }
-                });
-            }
-            
-            const mobileToggle = document.querySelector('.mobile-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            if (mobileToggle && navMenu) {
-                mobileToggle.addEventListener('click', function() {
-                    navMenu.classList.toggle('active');
-                    
-                    const icon = mobileToggle.querySelector('i');
-                    if (navMenu.classList.contains('active')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                });
-            }
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    // Close mobile menu if open
-                    if (navMenu && navMenu.classList.contains('active')) {
-                        navMenu.classList.remove('active');
-                        const icon = mobileToggle.querySelector('i');
-                        if (icon) {
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
-                    }
-                    
-                    const href = this.getAttribute('href');
-                    if (href !== '#') {
-                        const target = document.querySelector(href);
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                            
-                            // For debugging - add a visual indicator
-                            console.log('Scrolling to:', href);
-                        } else {
-                            console.log('Target not found:', href);
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+      </article>
+ 
+      <article class="service">
+        <div class="service-num">04</div>
+        <div>
+          <h3 class="service-name">Database Cleanup</h3>
+          <div class="service-pain">A CRM nobody trusts</div>
+        </div>
+        <p class="service-desc">Duplicates, missing fields, old contacts, inconsistent formatting. We go through it all, fix what's fixable, fill in what's missing, and leave you with something your team will actually use. Then we set up the checks so it stays clean.</p>
+        <div class="service-tags">
+          <span class="tag">RevOps</span>
+          <span class="tag">Marketing</span>
+        </div>
+      </article>
+ 
+      <article class="service">
+        <div class="service-num">05</div>
+        <div>
+          <h3 class="service-name">Onboarding Flows</h3>
+          <div class="service-pain">Every new hire, every new client, from scratch</div>
+        </div>
+        <p class="service-desc">Whether it's new employees or new customers, onboarding is usually the same steps repeated differently every time. We build you a smooth, consistent flow that guides people through, answers their questions, and keeps your team in the loop without anyone chasing anyone.</p>
+        <div class="service-tags">
+          <span class="tag">HR</span>
+          <span class="tag">Customer Success</span>
+        </div>
+      </article>
+ 
+      <article class="service">
+        <div class="service-num">06</div>
+        <div>
+          <h3 class="service-name">Document Handling</h3>
+          <div class="service-pain">Reading, sorting, typing things into systems</div>
+        </div>
+        <p class="service-desc">Contracts, invoices, proposals, applications, forms. Anything that arrives as a PDF or an email and ends up as a field in a spreadsheet. We automate the reading, the extracting, and the filing, so your team stops doing work that was never a good use of their time.</p>
+        <div class="service-tags">
+          <span class="tag">Finance</span>
+          <span class="tag">Legal</span>
+          <span class="tag">Admin</span>
+        </div>
+      </article>
+ 
+      <article class="service">
+        <div class="service-num">07</div>
+        <div>
+          <h3 class="service-name">Getting Started with AI</h3>
+          <div class="service-pain">Everyone talks about it, nobody knows where to start</div>
+        </div>
+        <p class="service-desc">If you know AI should be helping your business but you don't know where to begin, we sit down with you, look at your actual work, and tell you honestly where it will help and where it won't. You walk away with a clear plan and no pressure to hire us to build it.</p>
+        <div class="service-tags">
+          <span class="tag">Advisory</span>
+          <span class="tag">All teams</span>
+        </div>
+      </article>
+ 
+    </div>
+  </div>
+</section>
+ 
+<section class="approach" id="approach">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-label" data-num="02 —">How we work</div>
+        <h2>No long projects.<br><em>No big bills.</em></h2>
+      </div>
+      <p>We don't sell transformations or six month roadmaps. We find one painful thing, we fix it properly, and then we see what's next. Most of our projects go from first call to something running in your business in three to six weeks.</p>
+    </div>
+ 
+    <div class="approach-grid">
+      <div class="step">
+        <div class="step-num"><em>i.</em></div>
+        <h3 class="step-title">We listen</h3>
+        <p class="step-desc">A short call, no prep needed. You tell us what's frustrating, we tell you honestly if we can help. If we can, you get a one page plan and a fixed price.</p>
+      </div>
+      <div class="step">
+        <div class="step-num"><em>ii.</em></div>
+        <h3 class="step-title">We build</h3>
+        <p class="step-desc">Within a week or two you have something working, using your real data. You try it, you tell us what's off, we adjust. No surprises at the end.</p>
+      </div>
+      <div class="step">
+        <div class="step-num"><em>iii.</em></div>
+        <h3 class="step-title">We hand it over</h3>
+        <p class="step-desc">It goes live, connected to the tools your team already uses. We write a short guide, walk one person through it, and you're up and running.</p>
+      </div>
+      <div class="step">
+        <div class="step-num"><em>iv.</em></div>
+        <h3 class="step-title">We stay close</h3>
+        <p class="step-desc">Thirty days of support included, no questions asked. After that, keep us on call or don't. Most clients come back for the next thing, but that's up to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-intro">
+        <div class="section-label" data-num="03 —">Get in touch</div>
+        <h2>Tell us what's<br><em>eating your week.</em></h2>
+        <p>If there's something your team does that feels like it shouldn't still be manual in 2026, that's the conversation we'd like to have. Quick replies, plain language, no sales pitch.</p>
+        <div class="contact-meta">
+          Response time · <span>under 24 hours</span><br>
+          Typical project · <span>3 to 6 weeks</span><br>
+          Based in · <span>Europe, remote friendly</span>
+        </div>
+      </div>
+ 
+      <form id="contactForm" action="#" method="post">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required placeholder="Jane Doe" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="jane@company.com" />
+        </div>
+        <div class="field">
+          <label for="service">What do you need help with</label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Pick what fits best</option>
+            <option value="knowledge-base">Internal knowledge base</option>
+            <option value="automation">Process automation</option>
+            <option value="research">Research on autopilot</option>
+            <option value="database">Database cleanup</option>
+            <option value="onboarding">Onboarding flows</option>
+            <option value="documents">Document handling</option>
+            <option value="advisory">Getting started with AI</option>
+            <option value="not-sure">Not sure yet, happy to chat</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">A few lines about the problem</label>
+          <textarea id="message" name="message" rows="4" placeholder="What's taking too long, who's spending time on it, what you wish would just happen by itself."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Send message
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 7h12M8 2l5 5 5 5"/></svg>
+        </button>
+        <p class="form-note">Or email us directly at <a href="mailto:hello@starkaistudio.com">hello@starkaistudio.com</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+ 
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>© 2026 StarkAIstudio. All rights reserved.</div>
+      <div><a href="#">LinkedIn</a></div>
+    </div>
+  </div>
+</footer>
+ 
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    const original = btn.innerHTML;
+    btn.innerHTML = 'Thanks, we\u2019ll be in touch';
+    btn.disabled = true;
+    setTimeout(() => { btn.innerHTML = original; btn.disabled = false; this.reset(); }, 3200);
+  });
+</script>
+ 
 </body>
 </html>
